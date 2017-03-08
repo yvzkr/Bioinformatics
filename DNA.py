@@ -36,9 +36,15 @@ for i in range(baslangic,uzunluk,aralık):
             G=G+1
         elif a=="C":
             C=C+1
-    sGC=(G-C)/(G+C)
-    sAT=(A-T)/(A+T)
-    print(sGC,sAT)
+    print("A : {}\n T : {}\n G : {}\n C : {}\n ".format(A,T,G,C))
+    try:
+        sGC=(float)(G-C)/(G+C)
+        sAT=(float)(A-T)/(A+T)
+    except ZeroDivisionError:
+        sGC=0.0
+        sAT=0.0
+
+    print("GC kayması: ",sGC," AT kayması",sAT)
 
 
 
