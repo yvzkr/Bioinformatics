@@ -29,10 +29,7 @@ for i in range(baslangic,uzunluk,aralık):
     blok=bazlar[i:aralık+i]
     print("blok da yazan",blok)
     #sGC hesaplama
-    A=0
-    T=0
-    G=0
-    C=0
+    A,T,G,C=0,0,0,0
     for a in blok:
         if a=="A":
             A=A+1
