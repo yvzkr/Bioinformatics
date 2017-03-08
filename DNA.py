@@ -21,9 +21,6 @@ aralık=5
 baslangic=0
 start=0
 
-T=0
-G=0
-C=0
 for i in range(baslangic,uzunluk,aralık):
     print(bazlar[i:aralık+i])
     blok=bazlar[i:aralık+i]
@@ -39,7 +36,11 @@ for i in range(baslangic,uzunluk,aralık):
             G=G+1
         elif a=="C":
             C=C+1
-    print("A : {}\n T : {}\n G : {}\n C : {}\n ".format(A,T,G,C))
+    sGC=(G-C)/(G+C)
+    sAT=(A-T)/(A+T)
+    print(sGC,sAT)
+
+
 
 
 
