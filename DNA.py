@@ -1,20 +1,16 @@
 import re
 import matplotlib.pyplot as plt
-import collection
+from collections import Counter
 
 
 sequence=""
 uzunluk=0
-with open("pEGFP.fasta", "r") as f:
-    header=f.readline()
-    veri=f.read()
-    for harf in veri:
-        nesne=re.search("\\n",harf)
-        if nesne:
-            pass
-        else:
-            uzunluk=uzunluk+1
-            sequence=sequence+harf
+with open("sequence.fasta") as f:
+    fasta=f.read()
+for genome in fasta.split(">")[1:]:
+    header, genomeseq=genome.splitlines()[0],"".join(genome.splitlines()[1:])
+    counts=Counter(genomeseq)
+
 
 #print(uzunluk,"\n",header)
 
