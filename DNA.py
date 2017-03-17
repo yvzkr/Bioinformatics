@@ -7,8 +7,7 @@ with open("coli.fasta") as f:
 for genome in fasta.split(">")[1:]:
     header, genomeseq = genome.splitlines()[0], "".join(genome.splitlines()[1:])
     counts = Counter(genomeseq)
-    genomeSeqlen=0
-    genomeSeqlen=counts["A"]+counts["T"]+counts["G"]+counts["C"]
+    genomeSeqlen=len(genomeseq)
 
 
     #print("Counts for the genome:", header)
@@ -39,6 +38,25 @@ def c_gc_skewness(pieceSeqLen):
 
         #print(genome," G nin sayisi= ",G," C nin sayisi= ",C,"gc kaymasi: ",sGC)
     Draw_graphic(listey)
+
+
+def c_at_skewness(pieceSeqLen):
+    #counts = Counter(genomeseq)
+    liste=[0]
+    for i in range(0,genomeSeqlen,pieceSeqLen):
+        genome=genomeseq[i:i+pieceSeqLen]
+        countsGenome=Counter(genome)
+        A,T=countsGenome["A"],countsGenome["T"]
+        try:
+            sAT=(A-T)/(A+T)
+        except ZeroDivisionError:
+            sAT=0
+            #print("sGC:",sGC,"son eleman",listey[-1])
+            #print(genome," G nin sayisi= ",G," C nin sayisi= ",C,"gc kaymasi: ",sGC)
+        liste.append((liste[-1]+sAT))
+
+        #print(genome," G nin sayisi= ",G," C nin sayisi= ",C,"gc kaymasi: ",sGC)
+    Draw_graphic(liste)
 
 
 
