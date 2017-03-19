@@ -46,7 +46,7 @@ class DNA:
         #counts = Counter(genomeseq)
         liste=[0]
         for i in range(0,self.genomeSeqlen,pieceSeqLen):
-            genome=self.genomeseq[i:i+pieceSeqLen]
+            genome          =   self.genomeseq[i:i+pieceSeqLen]
             countsGenome    =   Counter(genome)
             A,T             =   countsGenome["A"],countsGenome["T"]
             try:
@@ -60,9 +60,36 @@ class DNA:
         plt.plot(range(0,len(liste)),liste)
         plt.show()
 
+    def CpG_func(self, pieceSeqLen):
+        for i in range(0, self.genomeSeqlen, pieceSeqLen):
+            genome          =   self.genomeseq[i:i+pieceSeqLen]
+            countsGenome    =   Counter(genome)
+            CG              =   countsGenome["CG"]
+            C,G             =   countsGenome["C"],countsGenome["G"]
+            print(genome)
+            print("CG birlikteliginin sayisi: ", CG)
+            print("C lerin sayisi: ",C," G lerin sayisi: ",G)
+            CpG=0
+
+            if CpG != 0:
+                print(CpG)
+                print("C lerin sayisi: ",C," G lerin sayisi: ",G)
+
+
+
+
+
+    def Sahnnas_Entropisi(self):
+        pass
+
+
+
 
 
 
 eren    =   DNA("coli.fasta")
 coli    =   DNA("coli.fasta")
-coli.c_gc_skewness(50)
+#coli.CpG_func(10)
+met="yavuz kuru naber naber"
+y=Counter(met)
+print(y["na"])
