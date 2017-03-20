@@ -81,16 +81,24 @@ class DNA:
     def Zcurved(self):
         listx,listy,listz   =   [],[],[]
         A,T,G,C             =   0,0,0,0
-        for i in range(1, 10):
-            genome          =   self.genomeseq[0:i]
-            countsGenome    =   Counter(genome)
-            A,T             =   countsGenome["A"],countsGenome["T"]
-            G,C             =   countsGenome["G"],countsGenome["C"]
+        #sayac=0
+        for i in self.genomeseq:
+            if   i ==   "A":
+                A   =   A + 1
+            elif i ==   "T":
+                T   =   T + 1
+            elif i ==   "G":
+                G   =   G + 1
+            elif i ==   "C":
+                C   =   C + 1
+            """sayac=sayac+1
+            if sayac==10:
+                break"""
             listx.append((A+G)-(C+T))
             listy.append((A+C)-(G+T))
             listz.append((A+T)-(G+C))
             #bunlar üç boyutlu bir grafikte çizilecek
-            print(genome)
+
             print("A nın sayısı: {}\nT nin sayisi: {}\nG nin sayisi: {}\nC nin sayisi: {}".format(A,T,G,C))
             print(listx)
 
@@ -102,3 +110,4 @@ class DNA:
 
 eren    =   DNA("coli.fasta")
 coli    =   DNA("coli.fasta")
+coli.Zcurved()
