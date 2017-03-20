@@ -100,8 +100,5 @@ class DNA:
         pass
 
 
-#eren    =   DNA("coli.fasta")
-#coli    =   DNA("coli.fasta")
-met="naberlamatin"
-for i in met:
-    print(i)
+eren    =   DNA("coli.fasta")
+coli    =   DNA("coli.fasta")
