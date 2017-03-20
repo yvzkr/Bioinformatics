@@ -80,6 +80,7 @@ class DNA:
 
     def Zcurved(self):
         listx,listy,listz   =   [],[],[]
+        A,T,G,C             =   0,0,0,0
         for i in range(1, 10):
             genome          =   self.genomeseq[0:i]
             countsGenome    =   Counter(genome)
@@ -100,5 +101,7 @@ class DNA:
 
 
 #eren    =   DNA("coli.fasta")
-coli    =   DNA("coli.fasta")
-coli.Zcurved()
+#coli    =   DNA("coli.fasta")
+met="naberlamatin"
+for i in met:
+    print(i)
