@@ -1,5 +1,6 @@
 from collections import Counter
 import matplotlib.pyplot as plt
+import re
 
 
 class DNA:
@@ -26,13 +27,13 @@ class DNA:
             ####buraya kadar DNA nın sabit olan özellikleri tanımlandı
     def c_gc_skewness(self, pieceSeqLen):
         #counts = Counter(genomeseq)
-        liste=[0]
+        liste               =   [0]
         for i in range(0,self.genomeSeqlen,pieceSeqLen):
-            genome=self.genomeseq[i:i+pieceSeqLen]
-            countsGenome=Counter(genome)
-            G,C=countsGenome["G"],countsGenome["C"]
+            genome          =   self.genomeseq[i:i+pieceSeqLen]
+            countsGenome    =   Counter(genome)
+            G,C             =   countsGenome["G"],countsGenome["C"]
             try:
-                sGC=(G-C)/(G+C)
+                sGC         =   (G-C)/(G+C)
             except ZeroDivisionError:
                 sGC=0
                 #print("sGC:",sGC,"son eleman",listey[-1])
@@ -50,7 +51,7 @@ class DNA:
             countsGenome    =   Counter(genome)
             A,T             =   countsGenome["A"],countsGenome["T"]
             try:
-                sAT=(A-T)/(A+T)
+                sAT         =   (A-T)/(A+T)
             except ZeroDivisionError:
                 sAT=0
                 #print("sGC:",sGC,"son eleman",listey[-1])
@@ -62,20 +63,35 @@ class DNA:
 
     def CpG_func(self, pieceSeqLen):
         for i in range(0, self.genomeSeqlen, pieceSeqLen):
-            genome          =   self.genomeseq[i:i+pieceSeqLen]
-            countsGenome    =   Counter(genome)
-            CG              =   countsGenome["CG"]
-            C,G             =   countsGenome["C"],countsGenome["G"]
+            genome          =   self.genomeseq[i:i+pieceSeqLen]     #belirlediğimiz genom aralığını aldık
+            countsGenome    =   Counter(genome)                     #C ve G yi saymak için countsGenome
+            C,G             =   countsGenome["C"],countsGenome["G"] #C ve G yi saydık Counter ile
+            CG              =   len(re.findall("CG",genome))        #regex ile CG birleşkesini bulduk
+
+            try:
+                CpG         =   CG/(C*G)                            #CpG yi hesapladık
+            except ZeroDivisionError:
+                CpG=0
+
             print(genome)
             print("CG birlikteliginin sayisi: ", CG)
             print("C lerin sayisi: ",C," G lerin sayisi: ",G)
-            CpG=0
+            print("Sonuc: ",CpG)
 
-            if CpG != 0:
-                print(CpG)
-                print("C lerin sayisi: ",C," G lerin sayisi: ",G)
-
-
+    def Zcurved(self):
+        listx,listy,listz   =   [],[],[]
+        for i in range(1, 10):
+            genome          =   self.genomeseq[0:i]
+            countsGenome    =   Counter(genome)
+            A,T             =   countsGenome["A"],countsGenome["T"]
+            G,C             =   countsGenome["G"],countsGenome["C"]
+            listx.append((A+G)-(C+T))
+            listy.append((A+C)-(G+T))
+            listz.append((A+T)-(G+C))
+            #bunlar üç boyutlu bir grafikte çizilecek
+            print(genome)
+            print("A nın sayısı: {}\nT nin sayisi: {}\nG nin sayisi: {}\nC nin sayisi: {}".format(A,T,G,C))
+            print(listx)
 
 
 
@@ -83,13 +99,6 @@ class DNA:
         pass
 
 
-
-
-
-
-eren    =   DNA("coli.fasta")
+#eren    =   DNA("coli.fasta")
 coli    =   DNA("coli.fasta")
-#coli.CpG_func(10)
-met="yavuz kuru naber naber"
-y=Counter(met)
-print(y["na"])
+coli.Zcurved()
