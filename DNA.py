@@ -65,21 +65,25 @@ class DNA:
         plt.show()
 
     def CpG_func(self, pieceSeqLen):
+        liste               =   []
         for i in range(0, self.genomeSeqlen, pieceSeqLen):
             genome          =   self.genomeseq[i:i+pieceSeqLen]     #belirlediğimiz genom aralığını aldık
             countsGenome    =   Counter(genome)                     #C ve G yi saymak için countsGenome
             C,G             =   countsGenome["C"],countsGenome["G"] #C ve G yi saydık Counter ile
             CG              =   len(re.findall("CG",genome))        #regex ile CG birleşkesini bulduk
-
             try:
                 CpG         =   CG/(C*G)                            #CpG yi hesapladık
             except ZeroDivisionError:
                 CpG=0
+            liste.append(CpG)
 
-            print(genome)
-            print("CG birlikteliginin sayisi: ", CG)
-            print("C lerin sayisi: ",C," G lerin sayisi: ",G)
-            print("Sonuc: ",CpG)
+        plt.plot(range(0,len(liste)),liste)
+        plt.show()
+
+            #print(genome)
+            #print("CG birlikteliginin sayisi: ", CG)
+            #print("C lerin sayisi: ",C," G lerin sayisi: ",G)
+            #print("Sonuc: ",CpG)
 
     def Zcurved(self):
         listx,listy,listz   =   [],[],[]
