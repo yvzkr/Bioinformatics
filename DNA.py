@@ -1,7 +1,9 @@
 from collections import Counter
-import matplotlib.pyplot as plt
+import matplotlib as mpl
 import re
-
+import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
 
 class DNA:
     def __init__(self, filename, start=3):
@@ -25,7 +27,7 @@ class DNA:
             self.start,self.finish      =   5,3
 
             ####buraya kadar DNA nın sabit olan özellikleri tanımlandı
-    def c_gc_skewness(self, pieceSeqLen):
+    def c_gc_skewness(self, pieceSeqLen=50):
         #counts = Counter(genomeseq)
         liste               =   [0]
         for i in range(0,self.genomeSeqlen,pieceSeqLen):
@@ -43,7 +45,7 @@ class DNA:
         plt.plot(range(0,len(liste)),liste)
         plt.show()
 
-    def c_at_skewness(self, pieceSeqLen):
+    def c_at_skewness(self, pieceSeqLen=50):
         #counts = Counter(genomeseq)
         liste=[0]
         for i in range(0,self.genomeSeqlen,pieceSeqLen):
@@ -58,6 +60,7 @@ class DNA:
                 #print(genome," G nin sayisi= ",G," C nin sayisi= ",C,"gc kaymasi: ",sGC)
             liste.append((liste[-1]+sAT))
             #print(genome," G nin sayisi= ",G," C nin sayisi= ",C,"gc kaymasi: ",sGC)
+
         plt.plot(range(0,len(liste)),liste)
         plt.show()
 
@@ -98,9 +101,17 @@ class DNA:
             listy.append((A+C)-(G+T))
             listz.append((A+T)-(G+C))
             #bunlar üç boyutlu bir grafikte çizilecek
+        mpl.rcParams['legend.fontsize'] =   10
+        fig                             =   plt.figure()
+        ax                              =   fig.gca(projection='3d')
+        ax.plot(listx,listy,listz)
+        ax.legend()
+        plt.show()
+            #print("A nın sayısı: {}\nT nin sayisi: {}\nG nin sayisi: {}\nC nin sayisi: {}".format(A,T,G,C))
+            #print(listx)
 
-            print("A nın sayısı: {}\nT nin sayisi: {}\nG nin sayisi: {}\nC nin sayisi: {}".format(A,T,G,C))
-            print(listx)
+
+
 
 
 
@@ -110,4 +121,4 @@ class DNA:
 
 eren    =   DNA("coli.fasta")
 coli    =   DNA("coli.fasta")
-coli.Zcurved()
+coli.c_at_skewness()
