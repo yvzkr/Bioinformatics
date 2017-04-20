@@ -154,34 +154,48 @@ def dizi_hizalama(dizi1,dizi2):
     deger               =   0
 
     for i in range(0,len(dizi2)+1):
-        matris[0][i]    =   deger
-        deger           =   deger - 2
-    deger               =   0
+        matris[0][i]        =   deger
+        deger               =   deger - 2
+    deger                   =   0
 
     for i in range(0,len(dizi1)+1):
-        matris[i][0]    =   deger
-        deger           =   deger - 2
+        matris[i][0]        =   deger
+        deger               =   deger - 2
 
     for i in matris:
         print(i)
 
-    dikeyeksen=["X"]
-    yatayeksen=["X"]
+    dikeyeksen          =   ["X"]
+    yatayeksen          =   ["X"]
     for i in dizi1:
         dikeyeksen.append(i)
     for i in dizi2:
         yatayeksen.append(i)
 
     print(yatayeksen)
+    gep=-2
+    match=5
+    Mismatch=-5
     #print(len(dikeyeksen))
     for i in range(1,len(yatayeksen)):
         for j in range(1,len(dikeyeksen)):
-            if dikeyeksen[j]==yatayeksen[i]:
-                print("Bunlarin ikisi: ",dikeyeksen[j]," ",yatayeksen[i])
-                print(matris[j][i])
+            if dikeyeksen[j]    ==  yatayeksen[i]:
+                #print("Bunlarin ikisi: ",dikeyeksen[j]," ",yatayeksen[i])
+                matris[j][i]    =   matris[j-1][i-1]    +   5
+            else:
+                solust          =   matris[j-1][i-1]    +   Mismatch
+                ust             =   matris[j-1][i]      +   gep
+                sol             =   matris[j][i-1]      +   gep
+                if solust>ust and solust>sol:
+                    matris[j][i]    =   solust
+                elif ust>solust and ust>sol:
+                    matris[j][i]    =   ust
+                else:
+                    matris[j][i]    =   sol
 
 
-
+    for i in matris:
+        print(i)
 
 
     #print("istedigim deger",matris[0][1])
@@ -190,6 +204,6 @@ def dizi_hizalama(dizi1,dizi2):
 
 #eren = DNA("pEGFP.fasta")
 coli = DNA("coli.fasta")
-dizi_hizalama("ATG","TCCGC")
+dizi_hizalama("TCCGCAT","ATGCCAGCAT")
 #eren.de_burjin()
 #shannas_entropi("ATATATAT")
