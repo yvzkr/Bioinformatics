@@ -174,9 +174,11 @@ def dizi_hizalama(dizi1,dizi2):
 
     print(yatayeksen)
     #print(len(dikeyeksen))
-    for i in range(0,len(yatayeksen)):
-        for j in range(0,len(dikeyeksen)):
-            print(matris[j][i])
+    for i in range(1,len(yatayeksen)):
+        for j in range(1,len(dikeyeksen)):
+            if dikeyeksen[j]==yatayeksen[i]:
+                print("Bunlarin ikisi: ",dikeyeksen[j]," ",yatayeksen[i])
+                print(matris[j][i])
 
 
 
