@@ -1,10 +1,11 @@
-#-*- coding: utf-8 -*-
+#-*- coding: cp1254 -*-
 from collections import Counter
 import matplotlib as mpl
 import re
-import numpy as np
+from numpy import *
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+import math
 
 
 class DNA:
@@ -78,7 +79,7 @@ class DNA:
             C, G = countsGenome["C"], countsGenome["G"]  # C ve G yi saydık Counter ile
             CG = len(re.findall("CG", genome))  # regex ile CG birleşkesini bulduk
             try:
-                CpG = CG / (C * G)  # CpG yi hesapladık
+                CpG = CG * pieceSeqLen / (C * G)  # CpG yi hesapladık
             except ZeroDivisionError:
                 CpG = 0
             print("Genome {}\nbölüme sayisi {}\nCnin sayisi {}\nGnin sayisi: {}".format(genome,CpG,C,G))
@@ -125,34 +126,68 @@ class DNA:
         # print("A nın sayısı: {}\nT nin sayisi: {}\nG nin sayisi: {}\nC nin sayisi: {}".format(A,T,G,C))
         # print(listx)
 
-    def shannas_entropi(self):
-        pass
-
     def de_burjin(self):
         pass
 
 
 
-        #print(liste)
+def shannas_entropi(sequence):
+    counts=Counter(sequence)
+    A,T,G,C=counts["A"],counts["T"],counts["G"],counts["C"]
+    print(A,T,G,C)
+    try:
+        A       =   (A/len(sequence))*(math.log(2,(A/len(sequence)/(1/4))))
+        T       =   (T/len(sequence))*(math.log(2,(T/len(sequence)/(1/4))))
+        G       =   (G/len(sequence))*(math.log(2,(G/len(sequence)/(1/4))))
+        C       =   (C/len(sequence))*(math.log(2,(C/len(sequence)/(1/4))))
+    except ZeroDivisionError:
+        A       =   0
+        G       =   0
+        T       =   0
+        C       =   0
+    shanna      =   A +  T
+    print(shanna)
+
 
 def dizi_hizalama(dizi1,dizi2):
-    liste=[[]]
-    deger=0
-    for i in range(0,10):
-        #liste[0][0]=0
-        deger=deger-2
-    deger=0
-    for i in range(0,len(dizi2)):
-        #liste[j][0]=deger
-        deger=deger-2
-    print(liste)
+    matris=zeros((len(dizi1)+1,len(dizi2)+1))
+    deger               =   0
+
+    for i in range(0,len(dizi2)+1):
+        matris[0][i]    =   deger
+        deger           =   deger - 2
+    deger               =   0
+
+    for i in range(0,len(dizi1)+1):
+        matris[i][0]    =   deger
+        deger           =   deger - 2
+
+    for i in matris:
+        print(i)
+
+    dikeyeksen=["X"]
+    yatayeksen=["X"]
+    for i in dizi1:
+        dikeyeksen.append(i)
+    for i in dizi2:
+        yatayeksen.append(i)
+
+    print(yatayeksen)
+    #print(len(dikeyeksen))
+    for i in range(0,len(yatayeksen)):
+        for j in range(0,len(dikeyeksen)):
+            print(matris[j][i])
 
 
 
+
+
+    #print("istedigim deger",matris[0][1])
 
 
 
 #eren = DNA("pEGFP.fasta")
 coli = DNA("coli.fasta")
-
+dizi_hizalama("ATG","TCCGC")
 #eren.de_burjin()
+#shannas_entropi("ATATATAT")
