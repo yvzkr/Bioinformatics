@@ -17,6 +17,5 @@ yapılması istenen CpG, C_GC_Skewness, C_AT_Skewness,ZCurved seçili iken grafi
 	-Shannas Entropi hesabi dizi hizlama ile aynı çalışmakta.Yine öncelikli şartımız fasta uzantılı file seçmiş olmak.
 ## Version 
 	v0.1 Release
-
-	Mustafa Aytunç
-	2012010205063 
+	Mustafa Aytunç ve Yavuz Kuru
+	
